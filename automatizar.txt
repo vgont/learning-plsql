@@ -1,0 +1,5 @@
+- automatizar - 
+1 - ao ocorrer um acidente, verificar se possui um causador (motorista), se sim, o sistema emite uma multa para o causador
+2 - ao registrar uma multa, irá ser retirado pontos da CNH do motorista
+3 - caso o CNH do motorista atingir o limite de pontos, a carteira deverá ser suspendida
+4 - caso uma multa não for paga até o prazo estimado, o sistema gerará uma nova multa
