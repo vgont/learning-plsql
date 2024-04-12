@@ -1,3 +1,63 @@
+create or replace trigger tr_id_motoristas
+before insert on motoristas
+for each row
+declare
+	v_id motoristas.id%type;
+begin
+	select sq_id_motoristas.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
+create or replace trigger tr_id_cnhs
+before insert on cnhs
+for each row
+declare
+	v_id cnhs.id%type;
+begin
+	select sq_id_cnhs.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
+create or replace trigger tr_id_veiculos
+before insert on veiculos
+for each row
+declare
+	v_id veiculos.id%type;
+begin
+	select sq_id_veiculos.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
+create or replace trigger tr_id_ruas
+before insert on ruas
+for each row
+declare
+	v_id ruas.id%type;
+begin
+	select sq_id_ruas.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
+create or replace trigger tr_id_acidentes
+before insert on acidentes
+for each row
+declare
+	v_id acidentes.id%type;
+begin
+	select sq_id_acidentes.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
+create or replace trigger tr_id_multas
+before insert on multas
+for each row
+declare
+	v_id multas.id%type;
+begin
+	select sq_id_multas.nextval into v_id from dual;
+	:new.id := v_id; 
+end;
+
 create or replace trigger tr_multa_causador_acidente
 after insert on acidentes
 for each row
