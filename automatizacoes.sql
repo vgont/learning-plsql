@@ -121,6 +121,7 @@ begin
         :new.pontos := v_soma_pontos;
     end if;
 end;
+/ 
 
 create or replace procedure pr_verificar_vencimento_multa is
 begin
