@@ -58,8 +58,9 @@ CREATE TABLE Ruas (
 CREATE TABLE Acidentes (
     id NUMBER,
     id_motorista NUMBER NOT NULL,
-    id_causador NUMBER,
     id_veiculo NUMBER NOT NULL,
+    id_causador NUMBER,
+    id_veiculo_causador NUMBER,
     id_rua NUMBER NOT NULL,
     dt_acidente DATE NOT NULL,
     descricao VARCHAR(250) NOT NULL,
