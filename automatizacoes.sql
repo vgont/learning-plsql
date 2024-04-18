@@ -77,10 +77,8 @@ begin
     
     if v_id_causador_acidente is not null then
 
-        select id into v_id_veiculo_causador_acidente
-        from veiculos
-        where id_motorista = v_id_causador_acidente;
-
+        v_id_veiculo_causador_acidente := :new.id_veiculo_causador;
+        
         insert into multas(id_motorista, id_veiculo, descricao, valor, dt_inicio, dt_vencimento, dt_pagamento)
         values(v_id_causador_acidente, v_id_veiculo_causador_acidente, v_descricao_acidente, 150, sysdate, (sysdate + 60), null);
     end if;
@@ -103,51 +101,26 @@ begin
 end;
 /
 
-create or replace function fn_verificar_limite_pontos_chn (
-    p_id_motorista in motoristas.id%type
-)
-return number
-is
-    v_tipo_cnh cnhs.tp_cnh%type;
-    p_limite_pontos int;
-begin
-    select tp_cnh into v_tipo_cnh
-    from cnhs
-    where id_motorista = p_id_motorista;
-
-    if v_tipo_cnh = 'trabalho' then
-        p_limite_pontos := 40;
-
-    else 
-        p_limite_pontos :=20;
-
-    end if;
-    return p_limite_pontos;
-end;
-/
-
 create or replace trigger tr_adicionar_pontos_cnh
 before update on cnhs
 for each row
 declare
-    v_pontos_atuais cnhs.pontos%type;
     v_pontos_maximos int;
     v_pontos_para_adicionar int := 4;
     v_soma_pontos int;
 begin
-    v_pontos_maximos := fn_verificar_limite_pontos_chn(:new.id_motorista);
+    select case when :new.tp_cnh = 'trabalho' then 40 else 20 end
+    into v_pontos_maximos
+    from dual;
 
-    v_pontos_atuais := :new.pontos;
-    v_soma_pontos := v_pontos_atuais + v_pontos_para_adicionar;
+    v_soma_pontos := :new.pontos + v_pontos_para_adicionar;
 
     if v_soma_pontos >= v_pontos_maximos then
-        :new.pontos := v_pontos_maximos;        
-
+        :new.pontos := v_pontos_maximos;
     else
         :new.pontos := v_soma_pontos;
     end if;
 end;
-/
 
 create or replace procedure pr_verificar_vencimento_multa is
 begin
