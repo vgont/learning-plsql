@@ -11,7 +11,7 @@ begin
     values('Andreia Pereira', '33344455566');
 exception
     when others then
-        dbms_output.put_line('erro ao inserir motoristas');
+        dbms_output.put_line('Erro ao inserir motoristas: ' || SQLERRM);
         null;
 end;
 /
@@ -27,7 +27,7 @@ begin
     values(3, '543219876', 20, 'trabalho');
 exception
     when others then
-        dbms_output.put_line('erro ao inserir cnhs');
+        dbms_output.put_line('Erro ao inserir cnhs: ' || SQLERRM);
         null;
 end;
 /
@@ -43,7 +43,7 @@ begin
     values(3, 'fsd-9c19');
 exception
     when others then
-        dbms_output.put_line('erro ao inserir veiculos');
+        dbms_output.put_line('Erro ao inserir veiculos: ' || SQLERRM);
         null;
 end;
 /
@@ -59,23 +59,23 @@ begin
     values('19918999', 'rua vila caipira');
 exception
     when others then
-        dbms_output.put_line('erro ao inserir ruas');
+        dbms_output.put_line('Erro ao inserir ruas: ' || SQLERRM);
         null;
 end;
 /
 
 begin
-    insert into acidentes(id_motorista, id_causador, id_veiculo, id_rua, descricao, dt_acidente)
-    values(1, 1, 1, 1, 'o motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
+    insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
+    values(1, 1, 1, 1, 1, 'o motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
 
-    insert into acidentes(id_motorista, id_causador, id_veiculo, id_rua, descricao, dt_acidente)
-    values(2, 1, 2, 1, 'o motorista teve seu carro batido devido à outro motorista em alta velocidade', sysdate);
+    insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
+    values(2, 2, 1, 1, 'o motorista teve seu carro batido devido à outro motorista em alta velocidade', sysdate);
 
-    insert into acidentes(id_motorista, id_causador, id_veiculo, id_rua, descricao, dt_acidente)
-    values(3, null, 3, 2, 'um motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
+    insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
+    values(3, 3, null, null, 2, 'um motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
 exception
     when others then
-        dbms_output.put_line('erro ao inserir acidentes');
+        dbms_output.put_line('Erro ao inserir acidentes: ' || SQLERRM);
         null;
 end;
 /
@@ -91,7 +91,7 @@ begin
     values(3, 3, 'o motorista estava acima da velocidade permitida', 150, (sysdate - 30), sysdate, null);
 exception
     when others then
-        dbms_output.put_line('erro ao inserir multas');
+        dbms_output.put_line('Erro ao inserir multas: ' || SQLERRM);
         null;
 end;
 /
