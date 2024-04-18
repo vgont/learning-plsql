@@ -135,6 +135,7 @@ begin
 end;
 /
 
+/* comentado pois alunos não podem criar jobs no oracle db
 begin
     dbms_scheduler.create_job (
         job_name        => 'verificar_vencimento_multas_job',
@@ -146,3 +147,4 @@ begin
     );
 end;
 /
+*/
