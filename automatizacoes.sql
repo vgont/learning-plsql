@@ -85,7 +85,7 @@ begin
 end;
 /
 
-create or replace trigger tr_remocao_pontos_motorista_multa
+create or replace trigger tr_adicionar_pontos_motorista_multa
 after insert on multas
 for each row
 declare
@@ -101,24 +101,18 @@ begin
 end;
 /
 
-create or replace trigger tr_adicionar_pontos_cnh
+create or replace trigger tr_verificar_pontos_cnh
 before update on cnhs
 for each row
 declare
     v_pontos_maximos int;
-    v_pontos_para_adicionar int := 4;
-    v_soma_pontos int;
 begin
     select case when :new.tp_cnh = 'trabalho' then 40 else 20 end
     into v_pontos_maximos
     from dual;
-
-    v_soma_pontos := :new.pontos + v_pontos_para_adicionar;
-
-    if v_soma_pontos >= v_pontos_maximos then
+    if :new.pontos >= v_pontos_maximos then
         :new.pontos := v_pontos_maximos;
-    else
-        :new.pontos := v_soma_pontos;
+        :new.status_cnh := 'desativada';
     end if;
 end;
 / 
