@@ -68,8 +68,8 @@ begin
     insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
     values(1, 1, 1, 1, 1, 'o motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
 
-    insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
-    values(2, 2, 1, 1, 1, 'o motorista teve seu carro batido devido à outro motorista em alta velocidade', sysdate);
+    insert into acidentes(id_motorista, id_veiculo, id_rua, descricao, dt_acidente)
+    values(2, 2, 1, 'o motorista teve seu carro batido devido à outro motorista em alta velocidade', sysdate);
 
     insert into acidentes(id_motorista, id_veiculo, id_causador, id_veiculo_causador, id_rua, descricao, dt_acidente)
     values(3, 3, null, null, 2, 'um motorista estava acima da velocidade permitida e bateu em um carro', sysdate);
