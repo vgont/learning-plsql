@@ -112,7 +112,7 @@ begin
     from dual;
     if :new.pontos >= v_pontos_maximos then
         :new.pontos := v_pontos_maximos;
-        :new.status_cnh := 'desativada';
+        :new.status_cnh := 'suspensa';
     end if;
 end;
 / 
